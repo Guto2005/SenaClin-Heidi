@@ -210,9 +210,9 @@ ORDER BY nome ASC /*A-Z*/
 SELECT consulta.datahora,dentista.nome, paciente.nome,dentista.telefone, paciente.telefone
 FROM consulta
 INNER JOIN paciente
-ON  consulta.codDentista = consulta.codPaciente
+ON  paciente.codPaciente = consulta.codPaciente
 INNER JOIN dentista
-ON dentista.coddentista = paciente.codpaciente
+ON consulta.codDentista = dentista.codDentista
 
 SELECT * FROM dentista
 
