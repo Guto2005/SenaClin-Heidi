@@ -216,6 +216,7 @@ ON consulta.codDentista = dentista.codDentista
 
 SELECT * FROM dentista
 SELECT * FROM consulta
+SELECT * FROM paciente
 
 /* 11- Criar uma query que exiba a quantidade de dentistas que a clínica possui, agrupando-os por especialidade, ordenando pelo nome da especialidade de A-Z. Para isto, você utilizará o comando group by do sql.  */
 
@@ -228,3 +229,24 @@ ORDER BY especialidade ASC /*A-Z*/
 SELECT COUNT(codConsulta) AS quantidade_consultas
 FROM consulta
 WHERE datahora >= '2024-05-25'
+
+/* 13- Criar uma query que traga todos os tipos de consulta, agrupadas pela quantidade. */
+
+SELECT tipoconsulta, COUNT(codConsulta) AS quantidade
+FROM consulta
+GROUP BY tipoconsulta;
+
+/* 14- Criar uma query que traga o número de pacientes que a clínica possui. */
+
+SELECT COUNT(codPaciente) AS NumeroDePaciente
+FROM paciente;
+
+/* 15- Criar uma query que traga todas as consultas da especialidade implantodontia. Deve vir na query o nome do dentista, o cro, a data da consulta e o nome do paciente, ordenados da data mais atual para a mais antiga. */
+
+SELECT dentista.nome AS NomeDentista, dentista.CRO, consulta.datahora, paciente.nome AS NomePaciente
+FROM consulta
+JOIN dentista ON consulta.codDentista = dentista.codDentista
+JOIN paciente ON consulta.codPaciente = paciente.codPaciente
+WHERE dentista.especialidade = 'implantodontia'
+ORDER BY consulta.datahora DESC;
+
