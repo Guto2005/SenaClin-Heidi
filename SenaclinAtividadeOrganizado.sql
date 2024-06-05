@@ -170,6 +170,18 @@ VALUES ('2024-05-24 13:00:00', 'Avaliação', 2, 4, null);
 INSERT INTO Consulta (datahora, tipoconsulta, codpaciente, coddentista, observacao)
 VALUES ('2024-05-25 14:00:00', 'Avaliação', 3, 4, null);
  
+/* Consultas a mais */
+
+INSERT INTO Consulta (datahora, tipoconsulta, codpaciente, coddentista, observacao)
+VALUES ('2024-07-25 12:00:00', 'Avaliação', 4, 1, null);
+
+INSERT INTO Consulta (datahora, tipoconsulta, codpaciente, coddentista, observacao)
+VALUES ('2024-07-25 11:00:00', 'Avaliação', 5, 3, NULL);
+
+INSERT INTO Consulta (datahora, tipoconsulta, codpaciente, coddentista, observacao)
+VALUES ('2024-06-25 13:00:00', 'Avaliação', 6, 4, NULL);
+
+SELECT * FROM consulta
 
 /*NÃO EXECUTEEEEEEEE */
 
@@ -246,7 +258,9 @@ ORDER BY especialidade ASC /*A-Z*/
 
 SELECT COUNT(codConsulta) AS quantidade_consultas
 FROM consulta
-WHERE datahora >= '2024-05-25'
+WHERE datahora like '2024-05%'
+
+SELECT * FROM consulta
 
 /* 13- Criar uma query que traga todos os tipos de consulta, agrupadas pela quantidade. */
 
@@ -268,3 +282,18 @@ JOIN paciente ON consulta.codPaciente = paciente.codPaciente
 WHERE dentista.especialidade = 'implantodontia'
 ORDER BY consulta.datahora DESC;
 
+/* DESAFIO- Criar uma query que traga o quantas consultas cada um dos dentistas realizou ao longo de todo o período,  ordenando as do que atendeu mais pacientes para o que atendeu menos.  */
+
+SELECT 
+    d.nome AS 'nome do dentista', 
+    COUNT(c.codDentista) AS 'numero de consultas'
+FROM 
+    dentista d
+LEFT JOIN 
+    consulta c ON d.codDentista = c.codDentista
+GROUP BY 
+    d.codDentista
+ORDER BY 
+    `numero de consultas` DESC;
+    
+    SELECT * FROM consulta
